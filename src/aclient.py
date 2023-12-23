@@ -79,7 +79,7 @@ class aclient(discord.Client):
         elif self.chat_model == "Bard":
             return BardChatbot(secure_1psid=self.bard_secure_1psid, secure_1psidts=self.bard_secure_1psidts)
         elif self.chat_model == "Bing":
-            cookies = json.loads(open("./cookies.json", encoding="utf-8").read())
+            cookies = json.loads(open("./config/cookies.json", encoding="utf-8").read())
             return EdgeChatbot(cookies=cookies)
 
     async def process_messages(self):

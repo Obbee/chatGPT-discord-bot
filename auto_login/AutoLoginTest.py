@@ -137,6 +137,6 @@ class MicrosoftBingAutoLoginTest(unittest.TestCase):
         print('\n==== Testing for test_dump_cookies() ====')
         auto_login = MicrosoftBingAutoLogin(bing_account, bing_password, chrome_version)
         auto_login.dump_cookies()
-        self.assertEqual(os.path.exists('cookies.json'), True)
+        self.assertEqual(os.path.exists('./config/cookies.json'), True)
         #sleep(100)
         auto_login.driver.close()

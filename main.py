@@ -1,6 +1,6 @@
 import sys
 import pkg_resources
-
+sys.path.append('/EdgeGPT')
 from src import bot
 from src.log import logger
 from dotenv import load_dotenv

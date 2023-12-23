@@ -127,7 +127,7 @@ class MicrosoftBingAutoLogin():
 
     def dump_cookies(self):
         cookies = self.get_cookies()
-        json_file = 'cookies.json'
+        json_file = './config/cookies.json'
         print(f'Dump {json_file} ...')
         with open(json_file, 'w') as f:
             json.dump(cookies, f, indent=2)
