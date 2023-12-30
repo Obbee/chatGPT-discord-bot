@@ -214,7 +214,7 @@ gpt-engine: {chat_engine_status}
 
         await interaction.response.defer(thinking=True, ephemeral=client.isPrivate)
         try:
-            image_url = await art.draw(prompt)
+            image_url = await client.draw(prompt)
 
             await interaction.followup.send(image_url)
 

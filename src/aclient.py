@@ -4,6 +4,15 @@ import discord
 import asyncio
 from typing import Union
 
+import BingImageCreator
+
+ImageGenAsync = BingImageCreator.ImageGenAsync
+
+import openai
+
+from dotenv import load_dotenv
+from asgiref.sync import sync_to_async
+
 from src import responses
 from src.log import logger
 from auto_login.AutoLogin import GoogleBardAutoLogin, MicrosoftBingAutoLogin
@@ -159,5 +168,26 @@ class aclient(discord.Client):
         except Exception as e:
             logger.exception(f"Error while sending system prompt: {e}")
 
+
+    async def draw(self, prompt) -> list[str]:
+
+        if self.chat_model == "Bing":
+            cookies = json.loads(open("./config/cookies.json", encoding="utf-8").read())
+
+            image_generator = ImageGenAsync(all_cookies=cookies)
+            imageLinks = await image_generator.get_images(prompt)
+
+            return imageLinks[0]
+        else:
+            response = await sync_to_async(openai.images.generate)(
+                model="dall-e-3",
+                prompt=prompt,
+                n=1,
+                size="1024x1024",
+                quality="standard",
+            )
+            image_url = response.data[0].url
+
+            return image_url
 
 client = aclient()
